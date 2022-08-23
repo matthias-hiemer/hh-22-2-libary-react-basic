@@ -8,8 +8,8 @@ type BookProps = {
 
 export default function BookOverview(props: BookProps) {
 
-    const [newIsbn, setNewIsbn] = useState<string>("")
-    const [newTitle, setNewTitle] = useState<string>("")
+    const [newIsbn, setNewIsbn] = useState("")
+    const [newTitle, setNewTitle] = useState("")
 
     const onAdd = () => {
 
