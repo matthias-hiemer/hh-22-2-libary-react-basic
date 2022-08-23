@@ -1,23 +1,20 @@
 import React, {useState} from 'react';
 import './App.css';
 import BookOverview from "./components/BookOverview";
+import {Book} from "./model/Book";
 
 
 function App() {
 
-    const [books, setBooks] = useState([
-        {
-            isbn : "1",
-            title : "Moby Dick"
-        },        {
-            isbn : "2",
-            title : "Harry Potter"
-        },
-    ])
+    const [books, setBooks] = useState<Book[]>([])
+
+    const addBook = (book: Book) => {
+        setBooks([...books, book])
+    }
 
     return (
         <div className="App">
-            <BookOverview books={books} />
+            <BookOverview books={books} addBook={addBook} />
         </div>
     );
 }
