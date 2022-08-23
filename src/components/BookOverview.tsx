@@ -1,4 +1,5 @@
 import {Book} from "../model/Book";
+import {useState} from "react";
 
 type BookProps = {
     books: Book[]
@@ -7,14 +8,21 @@ type BookProps = {
 
 export default function BookOverview(props: BookProps) {
 
+    const [newIsbn, setNewIsbn] = useState<string>("")
+    const [newTitle, setNewTitle] = useState<string>("")
+
     const onAdd = () => {
 
         let additionalBook = {
-            isbn: "randomisbn",
-            title: "randomtitle"
+            isbn: newIsbn,
+            title: newTitle
         }
 
         props.addBook(additionalBook)
+
+        // reset input fields
+        setNewIsbn("")
+        setNewTitle("")
     }
 
     return (
@@ -23,6 +31,23 @@ export default function BookOverview(props: BookProps) {
             {
                 props.books.map((book) => <p>{book.title} (isbn: {book.isbn})</p>)
             }
+
+            <label>
+                ISBN:
+                <input
+                    type="text"
+                    name="isbn"
+                    value={newIsbn}
+                    onChange={(e) => setNewIsbn(e.target.value)} />
+            </label>
+            <label>
+                Title:
+                <input
+                    type="text"
+                    name="title"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)} />
+            </label>
 
             <button onClick={onAdd}>Add</button>
         </>
